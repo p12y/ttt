@@ -20,6 +20,10 @@ function winning(board, player) {
 
   return winningCombos.some(isRow);
 }
+
+function emptyIndices(board) {
+  return board.filter(i => (typeof i === 'number'));
+}
  
 class Board extends Component {
   constructor(props) {
