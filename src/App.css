@@ -1,0 +1,20 @@
+.board {
+  width: 15em;
+  height: 15em;
+  cursor: pointer;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  width: 1em;
+  height: 1em;
+  text-align: center;
+}
+
+.cellPad {
+  display: inline-block;
+}
