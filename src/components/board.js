@@ -6,6 +6,21 @@ function display(char) {
   return typeof char === 'string' ? char : null;
 }
 
+function winning(board, player) {
+  let winningCombos = [
+    [0,1,2],[3,4,5],[6,7,8],[0,3,6],
+    [1,4,7],[2,5,8],[0,4,8],[2,4,6]
+  ];
+  
+  function isRow(el, index, arr) {
+    return board[el[0]] === player && 
+           board[el[1]] === player && 
+           board[el[2]] === player;
+  }
+
+  return winningCombos.some(isRow);
+}
+ 
 class Board extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +36,8 @@ class Board extends Component {
 
   render() {
     const { board } = this.state;
-
+    let win = winning(this.state.board, this.state.humChar);
+    console.log(win);
     return (
       <table className="board">
         <tbody>
