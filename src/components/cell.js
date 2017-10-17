@@ -2,7 +2,9 @@ import React from 'react';
 
 const Cell = (props) => {
   return (
-    <td><div className="cellPad">{props.value}</div></td>
+    <td onClick={() => props.onClick(props.index)}>
+      <div className="cellPad">{props.value}</div>
+    </td>
   );
 }
 
