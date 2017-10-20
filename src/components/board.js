@@ -1,47 +1,47 @@
 import React, { Component } from 'react';
 import Cell from './cell'
 import update from 'immutability-helper';
+import minimax from '../minimax';
 
 function display(char) {
   return typeof char === 'string' ? char : null;
 }
 
-function winning(board, player) {
-  let winningCombos = [
-    [0,1,2],[3,4,5],[6,7,8],[0,3,6],
-    [1,4,7],[2,5,8],[0,4,8],[2,4,6]
-  ];
-  
-  function isRow(el, index, arr) {
-    return board[el[0]] === player && 
-           board[el[1]] === player && 
-           board[el[2]] === player;
-  }
-
-  return winningCombos.some(isRow);
-}
-
-function emptyIndices(board) {
-  return board.filter(i => (typeof i === 'number'));
+function cellIsEmpty(cell) {
+  return typeof cell === 'number';
 }
  
 class Board extends Component {
   constructor(props) {
     super(props);
-    this.state = { board: [0, 1, 2, 3, 4, 5, 6, 7, 8], humChar: "X", aiChar: "O" };
+    this.state = { board: [0,1,2,3,4,5,6,7,8], human: "X", ai: "O" };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(index) {
-    this.setState(update(this.state, 
-      { board: { $splice: [[index, 1, this.state.humChar]] } }
-    ));
+    if (!cellIsEmpty(this.state.board[index])) return false;
+
+    function aiMove() {
+      let move = minimax(this.state.board, this.state.ai).index;
+      if (cellIsEmpty(this.state.board[move])) {
+        this.setState(
+          update(
+            this.state, 
+            { board: { $splice: [[move, 1, this.state.ai]] } }
+        ));
+      }
+    }
+
+    this.setState(
+      update(
+        this.state, 
+        { board: { $splice: [[index, 1, this.state.human]] } }
+      ), aiMove
+    );
   }
 
   render() {
     const { board } = this.state;
-    let win = winning(this.state.board, this.state.humChar);
-    console.log(win);
     return (
       <table className="board">
         <tbody>
@@ -103,3 +103,4 @@ class Board extends Component {
 }
 
 export default Board;
+
