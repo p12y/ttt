@@ -48,8 +48,8 @@ function minimax(currBoard, player) {
   moves.push(move);
  });
 
- bestMove = player === "O" ? _.maxBy(moves, o => o.score) 
-  : _.minBy(moves, o => o.score);
+ bestMove = player === "O" ? _.maxBy(moves, 'score') 
+  : _.minBy(moves, 'score');
 
   return bestMove;
 }

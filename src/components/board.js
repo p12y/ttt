@@ -14,7 +14,7 @@ function cellIsEmpty(cell) {
 class Board extends Component {
   constructor(props) {
     super(props);
-    this.state = { board: [0,1,2,3,4,5,6,7,8], human: "X", ai: "O" };
+    this.state = { board: [0,1,2,3,4,5,6,7,8] };
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -22,12 +22,12 @@ class Board extends Component {
     if (!cellIsEmpty(this.state.board[index])) return false;
 
     function aiMove() {
-      let move = minimax(this.state.board, this.state.ai).index;
+      let move = minimax(this.state.board, this.props.ai).index;
       if (cellIsEmpty(this.state.board[move])) {
         this.setState(
           update(
             this.state, 
-            { board: { $splice: [[move, 1, this.state.ai]] } }
+            { board: { $splice: [[move, 1, this.props.ai]] } }
         ));
       }
     }
@@ -35,7 +35,7 @@ class Board extends Component {
     this.setState(
       update(
         this.state, 
-        { board: { $splice: [[index, 1, this.state.human]] } }
+        { board: { $splice: [[index, 1, this.props.human]] } }
       ), aiMove
     );
   }
