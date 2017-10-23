@@ -12,7 +12,7 @@ class App extends Component {
       difficulty: 'easy', 
       human: "X", ai: "O", 
       gameIsStarted: false, 
-      humWinCount: 0, 
+      humWinCount: 0,
       aiWinCount: 0,
       board: [0,1,2,3,4,5,6,7,8]
     };
@@ -39,7 +39,6 @@ class App extends Component {
 
   handleDifficultySelect(difficulty) {
     this.resetGame();
-
     this.setState({ difficulty });
   }
 
@@ -80,6 +79,7 @@ class App extends Component {
             ai={this.state.ai}
             onWin={this.handleWin} 
             board={this.state.board}
+            difficulty={this.state.difficulty}
           />
         </div>
         <DifficultySelect onClick={this.handleDifficultySelect} />

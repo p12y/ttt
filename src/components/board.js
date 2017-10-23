@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Cell from './cell'
 import update from 'immutability-helper';
-import minimax from '../minimax';
+import moves from '../moves';
 import won from '../won';
 
 function display(char) {
@@ -42,17 +42,33 @@ class Board extends Component {
         this.setState({ gameWon: true });
         this.props.onWin('ai');
         setTimeout(this.resetGame, 2000);
-      } else if (!this.state.board.some(i => {
-        return typeof i === 'number';
-      })) {
-        this.setState({ gameWon: true });
+      } else if (this.state.board.every(i => typeof i === 'string')) {
         setTimeout(this.resetGame, 2000);
       }
     }
 
     function aiMove() {
       calculateWinner.bind(this)();
-      let move = minimax(this.state.board, this.props.ai).index;
+      let move;
+
+      switch (this.props.difficulty) {
+        case 'easy': {
+          move = moves.easyMove(this.state.board);
+          break;
+        }
+        case 'medium': {
+          move = moves.mediumMove(this.state.board, this.props.ai);
+          break;
+        }
+        case 'hard': {
+          move = moves.hardMove(this.state.board, this.props.ai).index;
+          break;
+        }
+        default: {
+          move = moves.easyMove(this.state.board);
+          break;
+        }
+      }
 
       if (cellIsEmpty(this.state.board[move])) {
         this.setState(
