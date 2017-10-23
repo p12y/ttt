@@ -1,10 +1,27 @@
 import React from 'react';
 
+const styles = {display: 'inline-block'};
+
 const DifficultySelect = (props) => (
   <div>
-  <div onClick={() => props.onClick("easy")}>Easy</div>
-  <div onClick={() => props.onClick("medium")}>Medium</div>
-  <div onClick={() => props.onClick("hard")}>Hard</div>
+  <div 
+    style={styles} 
+    onClick={() => props.onClick("easy")}
+  >
+    Easy
+  </div>
+  <div 
+    style={styles} 
+    onClick={() => props.onClick("medium")}
+  >
+    Medium
+  </div>
+  <div 
+    style={styles} 
+    onClick={() => props.onClick("hard")}
+  >
+    Hard
+  </div>
 </div>
 )
 

@@ -1,10 +1,24 @@
 import React from 'react';
 
+const styles = {display: 'inline-block'};
+
 const PlayerSelect = (props) => (
   <div>
-    <div>Select player:</div>
-    <div onClick={() => props.onClick("X")}>X</div>
-    <div onClick={() => props.onClick("O")}>O</div>
+    <div style={styles}>
+      Select player:
+    </div>
+    <div 
+      style={styles} 
+      onClick={() => props.onClick("X")}
+    >
+      X
+    </div>
+    <div 
+      style={styles} 
+      onClick={() => props.onClick("O")}
+    >
+      O
+    </div>
   </div>
 )
 

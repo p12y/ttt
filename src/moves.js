@@ -6,17 +6,17 @@ function emptyIndices(board) {
 }
 
 const moves = {
-  easyMove: function(currBoard) {
+  easyMove(currBoard) {
     let availableCells = emptyIndices(currBoard);
     return _.sample(availableCells);
   },
-  mediumMove: function(currBoard, player) {
+  mediumMove(currBoard, player) {
     return _.sample([
       this.easyMove(currBoard), 
       this.hardMove(currBoard, player).index
     ]);
   },
-  hardMove: function(currBoard, player) { // minimax
+  hardMove(currBoard, player) { // minimax
     let availableCells = emptyIndices(currBoard);
     let bestMove, moves = [];
     

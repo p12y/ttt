@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Cell from './cell'
+import Cell from './cell';
 import update from 'immutability-helper';
 import moves from '../moves';
 import won from '../won';
@@ -50,7 +50,6 @@ class Board extends Component {
 
     function aiMove() {
       let move;
-
       switch (this.props.difficulty) {
         case 'easy': {
           move = moves.easyMove(this.state.board);
