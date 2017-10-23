@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Cell from './cell'
 import update from 'immutability-helper';
 import minimax from '../minimax';
+import won from '../won';
 
 function display(char) {
   return typeof char === 'string' ? char : null;
@@ -14,21 +15,51 @@ function cellIsEmpty(cell) {
 class Board extends Component {
   constructor(props) {
     super(props);
-    this.state = { board: [0,1,2,3,4,5,6,7,8] };
+    this.state = { 
+      board: props.board,
+      gameWon: false
+    };
+
     this.handleClick = this.handleClick.bind(this);
+    this.resetGame = this.resetGame.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.board !== nextProps.board) {
+      this.setState({board: nextProps.board});
+    }
   }
 
   handleClick(index) {
-    if (!cellIsEmpty(this.state.board[index])) return false;
+    if (this.state.gameWon || !cellIsEmpty(this.state.board[index])) return false;
+
+    function calculateWinner() {
+      if (won(this.state.board, this.props.human)) {
+        this.setState({ gameWon: true });
+        this.props.onWin('human');
+        setTimeout(this.resetGame, 2000);
+      } else if (won(this.state.board, this.props.ai)) {
+        this.setState({ gameWon: true });
+        this.props.onWin('ai');
+        setTimeout(this.resetGame, 2000);
+      } else if (!this.state.board.some(i => {
+        return typeof i === 'number';
+      })) {
+        this.setState({ gameWon: true });
+        setTimeout(this.resetGame, 2000);
+      }
+    }
 
     function aiMove() {
+      calculateWinner.bind(this)();
       let move = minimax(this.state.board, this.props.ai).index;
+
       if (cellIsEmpty(this.state.board[move])) {
         this.setState(
           update(
             this.state, 
             { board: { $splice: [[move, 1, this.props.ai]] } }
-        ));
+        ), calculateWinner);
       }
     }
 
@@ -38,6 +69,10 @@ class Board extends Component {
         { board: { $splice: [[index, 1, this.props.human]] } }
       ), aiMove
     );
+  }
+
+  resetGame() {
+    this.setState({ board: [0,1,2,3,4,5,6,7,8], gameWon: false });
   }
 
   render() {
