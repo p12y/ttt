@@ -53,6 +53,10 @@ class App extends Component {
         aiWinCount: this.state.aiWinCount + 1, 
         gameIsStarted: false 
       });
+    } else {
+      this.setState({ 
+        gameIsStarted: false 
+      });
     }
   }
 

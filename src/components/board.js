@@ -43,12 +43,12 @@ class Board extends Component {
         this.props.onWin('ai');
         setTimeout(this.resetGame, 2000);
       } else if (this.state.board.every(i => typeof i === 'string')) {
+        this.props.onWin('draw');
         setTimeout(this.resetGame, 2000);
       }
     }
 
     function aiMove() {
-      calculateWinner.bind(this)();
       let move;
 
       switch (this.props.difficulty) {
@@ -76,6 +76,8 @@ class Board extends Component {
             this.state, 
             { board: { $splice: [[move, 1, this.props.ai]] } }
         ), calculateWinner);
+      } else {
+        calculateWinner.bind(this)();
       }
     }
 
