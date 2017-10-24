@@ -1,5 +1,5 @@
 html, body, #root {
-  height: 100%;
+  height: 100vh;
   color: rgb(87, 87, 87);
 }
 
@@ -13,7 +13,8 @@ html, body, #root {
 
 .board {
   position: relative;
-  width: 40%;
+  width: 30%;
+  cursor: pointer;
 }
 
 .board:after {
@@ -55,7 +56,7 @@ html, body, #root {
   max-width: 100%;
   height: 100%;
   text-align: center;
-  font-size: 4em;
+  font-size: 5vmin;
   color: rgb(97, 198, 232);
 }
 
@@ -84,11 +85,16 @@ html, body, #root {
   padding: 1em;
   padding-top: 0;
   margin-bottom: 1em;
+  font-size: 1.5vmin;
 }
 
 .difficulty-select {
   margin-top: 1em;
   padding: 1em;
+}
+
+h1 {
+  font-size: 3.5vw;
 }
 
 .btn {
@@ -106,8 +112,8 @@ html, body, #root {
   box-shadow: 0px 1px 3px #666666;
   font-family: Arial;
   color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
+  font-size: 2vmin;
+  padding: 0.6em 1.6em 0.6em 1.6em;
   text-decoration: none;
   cursor: pointer;
   margin: 0.5em;

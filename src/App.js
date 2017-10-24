@@ -73,7 +73,10 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Tic-Tac-Toe</h1>
-        <PlayerSelect onClick={this.handlePlayerSelect} />
+        <PlayerSelect 
+          onClick={this.handlePlayerSelect} 
+          selected={this.state.human}
+        />
         <ScoreBoard 
           human={this.state.humWinCount} 
           ai={this.state.aiWinCount} 
@@ -86,7 +89,10 @@ class App extends Component {
           difficulty={this.state.difficulty}
           onClick={this.handleGameStart}
         />
-        <DifficultySelect onClick={this.handleDifficultySelect} />
+        <DifficultySelect 
+          onClick={this.handleDifficultySelect}
+          selected={this.state.difficulty}
+        />
       </div>
     );
   }
