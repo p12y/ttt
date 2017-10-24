@@ -84,7 +84,7 @@ html, body, #root {
 .score-board {
   padding: 1em;
   padding-top: 0;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   font-size: 1.5vmin;
 }
 
@@ -94,7 +94,7 @@ html, body, #root {
 }
 
 h1 {
-  font-size: 3.5vw;
+  font-size: 4vmin;
 }
 
 .btn {
@@ -138,3 +138,15 @@ h1 {
   background-image: linear-gradient(to bottom, #2775a5, #12344b);
   text-decoration: none;
 }
+
+@media screen and (max-width: 400px) {
+  .board {
+    width: 70%;
+  }
+ }
+
+ @media screen and (max-width: 700px) {
+  .board {
+    width: 65%;
+  }
+ }
