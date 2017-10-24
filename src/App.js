@@ -72,20 +72,20 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>Tic-Tac-Toe</h1>
         <PlayerSelect onClick={this.handlePlayerSelect} />
         <ScoreBoard 
           human={this.state.humWinCount} 
           ai={this.state.aiWinCount} 
         />
-        <div onClick={this.handleGameStart}>
-          <Board 
-            human={this.state.human} 
-            ai={this.state.ai}
-            onWin={this.handleWin} 
-            board={this.state.board}
-            difficulty={this.state.difficulty}
-          />
-        </div>
+        <Board 
+          human={this.state.human} 
+          ai={this.state.ai}
+          onWin={this.handleWin} 
+          board={this.state.board}
+          difficulty={this.state.difficulty}
+          onClick={this.handleGameStart}
+        />
         <DifficultySelect onClick={this.handleDifficultySelect} />
       </div>
     );

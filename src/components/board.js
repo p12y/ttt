@@ -95,61 +95,72 @@ class Board extends Component {
   render() {
     const { board } = this.state;
     return (
-      <table className="board">
-        <tbody>
-          <tr>
-            <Cell 
-              index={0}
-              onClick={this.handleClick} 
-              value={display(board[0])} 
-            />
-            <Cell 
-              index={1}
-              onClick={this.handleClick} 
-              value={display(board[1])} 
-            />
-            <Cell 
-              index={2}
-              onClick={this.handleClick} 
-              value={display(board[2])} 
-            />
-          </tr>
-          <tr>
-            <Cell 
-              index={3}
-              onClick={this.handleClick} 
-              value={display(board[3])} 
-            />
-            <Cell 
-              index={4}
-              onClick={this.handleClick} 
-              value={display(board[4])} 
-            />
-            <Cell 
-              index={5}
-              onClick={this.handleClick} 
-              value={display(board[5])} 
-            />
-          </tr>
-          <tr>
-            <Cell 
-              index={6}
-              onClick={this.handleClick} 
-              value={display(board[6])} 
-            />
-            <Cell 
-              index={7}
-              onClick={this.handleClick} 
-              value={display(board[7])} 
-            />
-            <Cell 
-              index={8}
-              onClick={this.handleClick} 
-              value={display(board[8])} 
-            />
-          </tr>
-        </tbody>
-      </table>
+      <div className="board" onClick={this.props.onClick}>
+        <div className="content">
+          <div className="grid">
+        <div className="row">
+          <Cell 
+            className="left"
+            index={0}
+            onClick={this.handleClick} 
+            value={display(board[0])} 
+          />
+          <Cell 
+            className="center"
+            index={1}
+            onClick={this.handleClick} 
+            value={display(board[1])} 
+          />
+          <Cell 
+            className="right"
+            index={2}
+            onClick={this.handleClick} 
+            value={display(board[2])} 
+          />
+        </div>
+        <div className="row middle">
+          <Cell 
+            className="left"
+            index={3}
+            onClick={this.handleClick} 
+            value={display(board[3])} 
+          />
+          <Cell 
+            className="center"
+            index={4}
+            onClick={this.handleClick} 
+            value={display(board[4])} 
+          />
+          <Cell 
+            className="right"
+            index={5}
+            onClick={this.handleClick} 
+            value={display(board[5])} 
+          />
+        </div>
+        <div className="row">
+          <Cell 
+            className="left"
+            index={6}
+            onClick={this.handleClick} 
+            value={display(board[6])} 
+          />
+          <Cell 
+            className="center"
+            index={7}
+            onClick={this.handleClick} 
+            value={display(board[7])} 
+          />
+          <Cell 
+            className="right"
+            index={8}
+            onClick={this.handleClick} 
+            value={display(board[8])} 
+          />
+          </div>
+          </div>
+          </div>
+      </div>
     );
   }
 }
