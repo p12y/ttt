@@ -3,6 +3,15 @@ import Cell from './cell';
 import update from 'immutability-helper';
 import moves from '../moves';
 import won from '../won';
+import { headShake } from 'react-animations';
+import { StyleSheet, css } from 'aphrodite';
+
+const styles = StyleSheet.create({
+  headShake: {
+    animationName: headShake,
+    animationDuration: '1s'
+  }
+});
 
 function display(char) {
   return typeof char === 'string' ? char : null;
@@ -17,7 +26,8 @@ class Board extends Component {
     super(props);
     this.state = { 
       board: props.board,
-      gameWon: false
+      gameWon: false,
+      isShaking: false
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -39,7 +49,7 @@ class Board extends Component {
         this.props.onWin('human');
         setTimeout(this.resetGame, 2000);
       } else if (won(this.state.board, this.props.ai)) {
-        this.setState({ gameWon: true });
+        this.setState({ gameWon: true, isShaking: true });
         this.props.onWin('ai');
         setTimeout(this.resetGame, 2000);
       } else if (this.state.board.every(i => typeof i === 'string')) {
@@ -89,13 +99,16 @@ class Board extends Component {
   }
 
   resetGame() {
-    this.setState({ board: [0,1,2,3,4,5,6,7,8], gameWon: false });
+    this.setState({ board: [0,1,2,3,4,5,6,7,8], gameWon: false, isShaking: false });
   }
 
   render() {
     const { board } = this.state;
     return (
-      <div className="board" onClick={this.props.onClick}>
+      <div 
+        className={`board ${this.state.isShaking ? css(styles.headShake) : ''}`} 
+        onClick={this.props.onClick}
+      >
         <div className="content">
           <div className="grid">
             <div className="row">

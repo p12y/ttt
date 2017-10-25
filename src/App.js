@@ -46,12 +46,13 @@ class App extends Component {
     if (winner === 'human') {
       this.setState({ 
         humWinCount: this.state.humWinCount + 1, 
-        gameIsStarted: false 
+        gameIsStarted: false, 
       });
     } else if (winner === 'ai') {
       this.setState({ 
         aiWinCount: this.state.aiWinCount + 1, 
-        gameIsStarted: false 
+        gameIsStarted: false,
+        isShaking: true
       });
     } else {
       this.setState({ 
@@ -65,7 +66,8 @@ class App extends Component {
       gameIsStarted: false, 
       humWinCount: 0, 
       aiWinCount: 0,
-      board: [0,1,2,3,4,5,6,7,8]
+      board: [0,1,2,3,4,5,6,7,8],
+      isShaking: false
     });
   }
 
