@@ -11,10 +11,17 @@ const moves = {
     return _.sample(availableCells);
   },
   mediumMove(currBoard, player) {
-    return _.sample([
+    const movesArr = [
       this.easyMove(currBoard), 
       this.hardMove(currBoard, player).index
-    ]);
+    ]
+    const weights = [2, 8];
+
+    let weightedMoves = weights.map((w, i) => {
+      return _.times(w, () => (movesArr[i]));
+    });
+    
+    return _.sample(_.flatten(weightedMoves));
   },
   hardMove(currBoard, player) { // minimax
     let availableCells = emptyIndices(currBoard);
