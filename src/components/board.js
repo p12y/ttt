@@ -80,11 +80,13 @@ class Board extends Component {
       }
 
       if (cellIsEmpty(this.state.board[move])) {
-        this.setState(
-          update(
-            this.state, 
-            { board: { $splice: [[move, 1, this.props.ai]] } }
-        ), calculateWinner);
+        setTimeout(() => { 
+          this.setState(
+            update(
+              this.state, 
+              { board: { $splice: [[move, 1, this.props.ai]] } }
+            ), calculateWinner)
+        }, 500);
       } else {
         calculateWinner.bind(this)();
       }
