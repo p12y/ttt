@@ -27,7 +27,8 @@ class Board extends Component {
     this.state = { 
       board: props.board,
       gameWon: false,
-      isShaking: false
+      isShaking: false,
+      acceptingInput: true
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -41,6 +42,10 @@ class Board extends Component {
   }
 
   handleClick(index) {
+    if (!this.state.acceptingInput) {
+      return false;
+    }
+
     if (this.state.gameWon || !cellIsEmpty(this.state.board[index])) return false;
 
     function calculateWinner() {
@@ -81,6 +86,7 @@ class Board extends Component {
 
       if (cellIsEmpty(this.state.board[move])) {
         setTimeout(() => { 
+          this.setState({acceptingInput: true});
           this.setState(
             update(
               this.state, 
@@ -89,6 +95,7 @@ class Board extends Component {
         }, 500);
       } else {
         calculateWinner.bind(this)();
+        this.setState({acceptingInput: true});
       }
     }
 
@@ -98,6 +105,7 @@ class Board extends Component {
         { board: { $splice: [[index, 1, this.props.human]] } }
       ), aiMove
     );
+    this.setState({acceptingInput: false});
   }
 
   resetGame() {
