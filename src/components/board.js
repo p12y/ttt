@@ -42,29 +42,41 @@ class Board extends Component {
   }
 
   handleClick(index) {
-    if (!this.state.acceptingInput) {
-      return false;
-    }
 
-    if (this.state.gameWon || !cellIsEmpty(this.state.board[index])) return false;
+    if (this.state.gameWon         ||  
+        !this.state.acceptingInput || 
+        !cellIsEmpty(this.state.board[index])
+    ) {
+      return false;
+    } 
+    
 
     function calculateWinner() {
       if (won(this.state.board, this.props.human)) {
         this.setState({ gameWon: true });
         this.props.onWin('human');
         setTimeout(this.resetGame, 2000);
+        return true;
       } else if (won(this.state.board, this.props.ai)) {
         this.setState({ gameWon: true, isShaking: true });
         this.props.onWin('ai');
         setTimeout(this.resetGame, 2000);
+        return true;
       } else if (this.state.board.every(i => typeof i === 'string')) {
         this.props.onWin('draw');
         setTimeout(this.resetGame, 2000);
+        return true;
       }
+      return false;
     }
 
     function aiMove() {
       let move;
+      if (calculateWinner.bind(this)()) {
+        this.setState({acceptingInput: true});
+        return false;
+      }
+
       switch (this.props.difficulty) {
         case 'easy': {
           move = moves.easyMove(this.state.board);
